@@ -58,9 +58,32 @@ export const HeaderMenu = () => {
                                 key={item.label}
                                 href={item.href}
                                 color="inherit"
-                                className="font-medium! capitalize!"
+                                className="font-medium! capitalize"
+                                sx={{
+                                    position: 'relative',
+                                    overflow: 'visible',
+                                    transition: 'color 0.25s ease',
+                                    '&::before': {
+                                        content: '""',
+                                        position: 'absolute',
+                                        inset: -2,
+                                        backgroundColor: '#ec4899', // bg-pink-500
+                                        transform: 'skewY(0deg) scale(0.85)',
+                                        opacity: 0,
+                                        zIndex: 0,
+                                        transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease',
+                                    },
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                        color: '#ffffff',
+                                        '&::before': {
+                                            opacity: 1,
+                                            transform: 'skewY(-3deg) scale(1)',
+                                        },
+                                    },
+                                }}
                             >
-                                {item.label}
+                                <span style={{ position: 'relative', zIndex: 1 }}>{item.label}</span>
                             </Button>
                         ))}
                     </Box>
