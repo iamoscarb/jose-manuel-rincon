@@ -6,3 +6,7 @@
     --color-blue: #30A0E0;
     --color-dark-blue: #006BBB;
 }
+
+::-webkit-scrollbar {
+    display: none !important;
+}
