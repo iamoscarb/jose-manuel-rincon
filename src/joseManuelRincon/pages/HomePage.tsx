@@ -1,10 +1,37 @@
+import jmrDesktop from '@/assets/jmr-hero-desktop.webp';
+import jmrMovil from '@/assets/jmr-hero-movil.webp';
+
 export const HomePage = () => {
     return (
         <div>
-            <picture className='w-full h-full block'>
-                <source media='(max-width:767px)' srcSet="https://img.editor80.com/iB9Vwkmu5PvMtFCT28kRXMSAoqOZQrSN40o-RXdc0IU/rs:fit:2000:2000:0/aHR0cHM6Ly9tZWRpYS5lZGl0b3I4MC5jb20vdGVuYW50cy9wYW5vcmFtYS9mb3RvZ3JhZmlhcy8yMDI2LzIvMjYvMjA0NDUzLmpwZWc" />
-                <img src="https://img.editor80.com/iB9Vwkmu5PvMtFCT28kRXMSAoqOZQrSN40o-RXdc0IU/rs:fit:2000:2000:0/aHR0cHM6Ly9tZWRpYS5lZGl0b3I4MC5jb20vdGVuYW50cy9wYW5vcmFtYS9mb3RvZ3JhZmlhcy8yMDI2LzIvMjYvMjA0NDUzLmpwZWc" alt="Jose Manuel Rincon" className="w-full h-full object-cover" />
+            {/*
+            1920 × 1080 px - DESKTOP
+            1080 × 1920 px - MOVIL
+            */}
+            <picture className='w-full h-full block' id='inicio'>
+                <source media='(max-width:767px)' srcSet={jmrMovil} />
+                <img src={jmrDesktop} alt="Jose Manuel Rincon - Hero" className="w-full h-full object-cover" />
             </picture>
+
+            <div className="w-full h-screen bg-blue-500" id='cine-tv'>
+                <p className='text-white text-center font-bold'>Cine y TV</p>
+            </div>
+
+            <div className="w-full h-screen bg-pink-500" id='teatro'>
+                <p className='text-white text-center font-bold'>Teatro</p>
+            </div>
+
+            <div className="w-full h-screen bg-green-500" id='audio-video'>
+                <p className='text-white text-center font-bold'>Audio y Video</p>
+            </div>
+
+            <div className="w-full h-screen bg-yellow-500 scroll-m-25" id='medios'>
+                <p className='text-white text-center font-bold pt-10 uppercase'>Medios</p>
+            </div>
+
+            <div className="w-full h-screen bg-orange-500" id='contacto'>
+                <p className='text-white text-center font-bold'>Contacto</p>
+            </div>
         </div>
     )
 }
