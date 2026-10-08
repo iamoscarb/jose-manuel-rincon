@@ -11,15 +11,16 @@ import ListItemButton from "@mui/material/ListItemButton"
 import ListItemText from "@mui/material/ListItemText"
 import useScrollTrigger from "@mui/material/useScrollTrigger"
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import { CustomLogo } from "./CustomLogo"
 
 const navItems = [
-    { label: "Inicio", href: "#inicio" },
-    { label: "Cine y TV", href: "#nosotros" },
-    { label: "Teatro", href: "#servicios" },
-    { label: "Audio y Video", href: "#galeria" },
-    { label: "Medios", href: "#contacto" },
-    { label: "Contacto", href: "#contacto" },
-
+    { label: "Inicio", href: "/#inicio" },
+    { label: "Cine y TV", href: "/#cine-tv" },
+    { label: "Teatro", href: "/#teatro" },
+    { label: "Audio y Video", href: "/#audio-video" },
+    { label: "Medios", href: "/#medios" },
+    { label: "Contacto", href: "/#contacto" },
 ]
 
 export const HeaderMenu = () => {
@@ -28,7 +29,7 @@ export const HeaderMenu = () => {
     // Se activa cuando el usuario baja más de 60px de scroll.
     const scrolled = useScrollTrigger({
         disableHysteresis: true,
-        threshold: 60,
+        threshold: 1080,
     })
 
     return (
@@ -45,11 +46,7 @@ export const HeaderMenu = () => {
             >
                 <Toolbar className="mx-auto w-full px-4">
                     {/* Logo / marca */}
-                    <Box className="flex flex-1 items-center gap-2">
-                        <span className="font-sans text-lg font-bold tracking-tight">
-                            José Manuel Rincón
-                        </span>
-                    </Box>
+                    <CustomLogo />
 
                     {/* Enlaces de escritorio */}
                     <Box className="hidden items-center gap-1 md:flex">
@@ -94,7 +91,7 @@ export const HeaderMenu = () => {
                         aria-label="Abrir menú"
                         edge="end"
                         onClick={() => setMobileOpen(true)}
-                        className="md:hidden!"
+                        className="md:hidden! text-2xl"
                     >
                         <MenuIcon />
                     </IconButton>
@@ -106,10 +103,23 @@ export const HeaderMenu = () => {
                 anchor="right"
                 open={mobileOpen}
                 onClose={() => setMobileOpen(false)}
-                slotProps={{ paper: { className: "!w-64 !bg-background !text-foreground" } }}
+                slotProps={{ paper: { className: "!w-3/4 !bg-background !text-foreground" } }}
             >
-                <Box className="flex items-center gap-2 px-4 py-4">
-                    <span className="text-lg font-bold">Altura</span>
+                <Box className="flex justify-between gap-2 px-5 py-5 ">
+                    <span className="text-2xl staatliches-font">
+                        José Manuel Rincón
+                    </span>
+
+                    <IconButton
+                        color="inherit"
+                        aria-label="Cerrar menú"
+                        edge="end"
+                        onClick={() => setMobileOpen(false)}
+                        className="md:hidden! text-2xl"
+                    >
+                        <CloseIcon />
+                    </IconButton>
+
                 </Box>
                 <List>
                     {navItems.map((item) => (
