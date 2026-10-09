@@ -13,6 +13,7 @@ import useScrollTrigger from "@mui/material/useScrollTrigger"
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { CustomLogo } from "./CustomLogo"
+import { useChangeScreenSize } from "../../joseManuelRincon/hooks/useChangeScreenSize"
 
 const navItems = [
     { label: "Inicio", href: "/#inicio" },
@@ -24,7 +25,8 @@ const navItems = [
 ]
 
 export const HeaderMenu = () => {
-    const [mobileOpen, setMobileOpen] = useState(false)
+    //const [mobileOpen, setMobileOpen] = useState(false);
+    const { openMenu, handleOpenMenu } = useChangeScreenSize();
 
     // Se activa cuando el usuario baja más de 60px de scroll.
     const scrolled = useScrollTrigger({
@@ -55,7 +57,7 @@ export const HeaderMenu = () => {
                                 key={item.label}
                                 href={item.href}
                                 color="inherit"
-                                className="font-medium! capitalize"
+                                className="font-medium! capitalize dm-sans-font!"
                                 sx={{
                                     position: 'relative',
                                     overflow: 'visible',
@@ -90,7 +92,7 @@ export const HeaderMenu = () => {
                         color="inherit"
                         aria-label="Abrir menú"
                         edge="end"
-                        onClick={() => setMobileOpen(true)}
+                        onClick={handleOpenMenu}
                         className="md:hidden! text-2xl"
                     >
                         <MenuIcon />
@@ -101,11 +103,11 @@ export const HeaderMenu = () => {
             {/* Drawer para móvil */}
             <Drawer
                 anchor="right"
-                open={mobileOpen}
-                onClose={() => setMobileOpen(false)}
-                slotProps={{ paper: { className: "!w-3/4 !bg-background !text-foreground" } }}
+                open={openMenu}
+                onClose={handleOpenMenu}
+                slotProps={{ paper: { className: "w-3/4!" } }}
             >
-                <Box className="flex justify-between gap-2 px-5 py-5 ">
+                <Box className="flex justify-between items-center gap-2 px-5 py-3">
                     <span className="text-2xl staatliches-font">
                         José Manuel Rincón
                     </span>
@@ -114,8 +116,8 @@ export const HeaderMenu = () => {
                         color="inherit"
                         aria-label="Cerrar menú"
                         edge="end"
-                        onClick={() => setMobileOpen(false)}
-                        className="md:hidden! text-2xl"
+                        onClick={handleOpenMenu}
+                        className="md:hidden! text-xl"
                     >
                         <CloseIcon />
                     </IconButton>
@@ -123,13 +125,14 @@ export const HeaderMenu = () => {
                 </Box>
                 <List>
                     {navItems.map((item) => (
-                        <ListItem key={item.label} disablePadding>
+                        <ListItem key={item.label} disablePadding className="px-3">
                             <ListItemButton
                                 component="a"
                                 href={item.href}
-                                onClick={() => setMobileOpen(false)}
+                                onClick={handleOpenMenu}
                             >
-                                <ListItemText primary={item.label} />
+                                <ListItemText primary={item.label}
+                                    className="uppercase dm-sans-font" />
                             </ListItemButton>
                         </ListItem>
                     ))}
