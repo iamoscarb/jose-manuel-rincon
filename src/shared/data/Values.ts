@@ -1,0 +1,1 @@
+export const DesktopBreakpoint: string = '(min-width:770px)';

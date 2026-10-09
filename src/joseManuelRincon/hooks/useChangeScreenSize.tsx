@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
+import { DesktopBreakpoint } from '../../shared/data/Values';
 
 export const useChangeScreenSize = () => {
     const [openMenu, setOpenMenu] = useState(false)
 
-    const theme = useTheme();
-    const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+    const isDesktop = useMediaQuery(DesktopBreakpoint);
 
     const handleOpenMenu = () => {
         setOpenMenu((prev) => {
