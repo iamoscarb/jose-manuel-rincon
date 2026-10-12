@@ -3,8 +3,8 @@
 @theme {
     --color-light-yellow: #FFE3B3;
     --color-yellow: #FFC872;
-    --color-blue: #30A0E0;
-    --color-dark-blue: #006BBB;
+    --color-primary: #1C1C1C;
+    --color-dark-blue: #3c3e40;
 }
 
 ::-webkit-scrollbar {

@@ -4,7 +4,7 @@ import { SocialMediaIcons } from "../icons/SocialMediaIcons"
 
 export const Footer = () => {
     return (
-        <Box className="grid grid-flow-row justify-center-safe p-5 bg-blue" >
+        <Box className="grid grid-flow-row justify-center-safe p-5 bg-primary" >
             <div className="grid grid-flow-col gap-3">
                 {
                     socialMediaList.map((social) => (

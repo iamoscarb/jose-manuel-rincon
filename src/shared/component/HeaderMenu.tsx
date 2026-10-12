@@ -1,4 +1,3 @@
-import { useState } from "react"
 import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Box from "@mui/material/Box"
@@ -25,26 +24,25 @@ const navItems = [
 ]
 
 export const HeaderMenu = () => {
-    //const [mobileOpen, setMobileOpen] = useState(false);
     const { openMenu, handleOpenMenu } = useChangeScreenSize();
 
     // Se activa cuando el usuario baja más de 60px de scroll.
     const scrolled = useScrollTrigger({
         disableHysteresis: true,
-        threshold: 1080,
+        threshold: 250,
     })
 
     return (
         <>
             <AppBar
                 elevation={0}
+                sx={{ background: 'transparent' }}
                 className={[
-                    "transition-all duration-300 ease-in-out",
+                    "transition-all! duration-300! ease-in-out!",
                     scrolled
-                        ? "bg-background/95! text-foreground! shadow-md backdrop-blur-md"
-                        : "bg-transparent! text-white! shadow-none",
+                        ? "bg-primary/10! shadow-md! backdrop-blur-md!"
+                        : "bg-transparent! text-white! shadow-none!",
                 ].join(" ")}
-                sx={{ backgroundImage: "none" }}
             >
                 <Toolbar className="mx-auto w-full px-4">
                     {/* Logo / marca */}
@@ -105,7 +103,7 @@ export const HeaderMenu = () => {
                 anchor="right"
                 open={openMenu}
                 onClose={handleOpenMenu}
-                slotProps={{ paper: { className: "w-3/4!" } }}
+                slotProps={{ paper: { className: "w-3/4! bg-primary! text-white!" } }}
             >
                 <Box className="flex justify-between items-center gap-2 px-5 py-3">
                     <span className="text-2xl staatliches-font">
@@ -121,8 +119,8 @@ export const HeaderMenu = () => {
                     >
                         <CloseIcon />
                     </IconButton>
-
                 </Box>
+
                 <List>
                     {navItems.map((item) => (
                         <ListItem key={item.label} disablePadding className="px-3">
