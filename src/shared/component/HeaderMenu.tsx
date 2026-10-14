@@ -11,8 +11,10 @@ import ListItemText from "@mui/material/ListItemText"
 import useScrollTrigger from "@mui/material/useScrollTrigger"
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { motion } from "motion/react"
 import { CustomLogo } from "./CustomLogo"
 import { useChangeScreenSize } from "../../joseManuelRincon/hooks/useChangeScreenSize"
+import { useHideMenu } from "../../joseManuelRincon/hooks/useHideMenu"
 
 const navItems = [
     { label: "Inicio", href: "/#inicio" },
@@ -24,23 +26,30 @@ const navItems = [
 ]
 
 export const HeaderMenu = () => {
+    const { hidden } = useHideMenu();
     const { openMenu, handleOpenMenu } = useChangeScreenSize();
 
     // Se activa cuando el usuario baja más de 60px de scroll.
     const scrolled = useScrollTrigger({
         disableHysteresis: true,
         threshold: 250,
-    })
+    });
 
     return (
         <>
             <AppBar
+                component={motion.header}
+                animate={{
+                    y: hidden ? - 140 : 0,
+                    opacity: hidden ? 0 : 1
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
                 elevation={0}
                 sx={{ background: 'transparent' }}
                 className={[
                     "transition-all! duration-300! ease-in-out!",
                     scrolled
-                        ? "bg-primary/10! shadow-md! backdrop-blur-md!"
+                        ? "bg-primary!"
                         : "bg-transparent! text-white! shadow-none!",
                 ].join(" ")}
             >
