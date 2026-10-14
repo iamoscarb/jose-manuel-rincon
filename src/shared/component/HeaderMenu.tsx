@@ -8,7 +8,6 @@ import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import ListItemButton from "@mui/material/ListItemButton"
 import ListItemText from "@mui/material/ListItemText"
-import useScrollTrigger from "@mui/material/useScrollTrigger"
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { motion } from "motion/react"
@@ -26,14 +25,8 @@ const navItems = [
 ]
 
 export const HeaderMenu = () => {
-    const { hidden } = useHideMenu();
+    const { hidden, scrolled } = useHideMenu();
     const { openMenu, handleOpenMenu } = useChangeScreenSize();
-
-    // Se activa cuando el usuario baja más de 60px de scroll.
-    const scrolled = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 250,
-    });
 
     return (
         <>
