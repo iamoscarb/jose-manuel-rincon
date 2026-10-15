@@ -1,5 +1,7 @@
 import jmrDesktop from '@/assets/jmr-hero-desktop.webp';
 import jmrMovil from '@/assets/jmr-hero-movil.webp';
+import { MoviesAndTvPage } from './MoviesAndTvPage';
+import { CustomBox } from '../../shared/component/CustomBox';
 
 export const HomePage = () => {
     return (
@@ -13,9 +15,9 @@ export const HomePage = () => {
                 <img src={jmrDesktop} alt="Jose Manuel Rincon - Hero" className="w-full h-full object-cover" />
             </picture>
 
-            <div className="w-full h-screen bg-blue-500" id='cine-tv'>
-                <p className='text-white text-center font-bold'>Cine y TV</p>
-            </div>
+            <CustomBox id='cine-tv'>
+                <MoviesAndTvPage />
+            </CustomBox>
 
             <div className="w-full h-screen bg-pink-500" id='teatro'>
                 <p className='text-white text-center font-bold'>Teatro</p>
