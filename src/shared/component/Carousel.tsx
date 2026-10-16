@@ -15,16 +15,16 @@ type Photo = {
 
 const photos: Photo[] = [
     {
-        src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-VgqyPykDWf82mdn8vfkmMHjvIGSdIE.png',
+        src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR91SnCfQhhT-EeI-9MnAyWcAxVLrSgoZf5hXxyxqPxEto52rBy0Y2Vr2eB&s=10',
         alt: 'Hamburguesa artesanal con queso fundido',
         eyebrow: '01 / 06',
-        title: 'Classic melt',
+        title: 'Te Esperaba',
     },
     {
-        src: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85',
+        src: 'https://images.vix.com/prd/videos/video:mcp:4770026/8f6800228219c3d535ea622a960d016c',
         alt: 'Hamburguesa doble con queso',
         eyebrow: '02 / 06',
-        title: 'Double stack',
+        title: 'Domenica Montero',
     },
     {
         src: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=85',
@@ -63,41 +63,26 @@ export function Carousel({ visible = 4 }: { visible?: number }) {
     }
 
     return (
-        <section className="w-full" aria-label="Galería destacada">
-            {/*<div className="mb-7 flex items-end justify-between gap-4">
-                <div className="hidden gap-2 sm:flex">
-                    <IconButton aria-label="Ver fotos anteriores" onClick={() => scroll('left')} size="small" sx={{ border: '1px solid #d6d3d1', color: '#292524' }}>
-                        <ArrowBackIosNewRounded fontSize="small" />
-                    </IconButton>
-                    <IconButton aria-label="Ver más fotos" onClick={() => scroll('right')} size="small" sx={{ border: '1px solid #d6d3d1', color: '#292524' }}>
-                        <ArrowForwardIosRounded fontSize="small" />
-                    </IconButton>
-                </div>
-            </div>*/}
-
-            <div ref={scrollRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4" style={{ scrollbarWidth: 'none' }}>
+        <section className="w-full" aria-label="Gallery">
+            <div ref={scrollRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0" style={{ scrollbarWidth: 'none' }}>
                 {photos.map((photo, index) => (
                     <motion.article
-                        key={`${photo.title}-${index}`}
-                        className="group relative min-w-[calc(100%-1rem)] snap-start overflow-hidden rounded-2xl bg-stone-200 sm:min-w-[calc(50%-0.5rem)] lg:min-w-[calc((100%-3rem)/4)]"
+                        key={index}
+                        className="group relative w-[calc(100vw-40px)] min-w-[calc(100%-1rem)] snap-center overflow-hidden rounded-xl bg-stone-200 sm:min-w-[calc(50%-0.5rem)] sm:snap-start lg:min-w-[calc((100%-3rem)/4)]"
                         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
                     >
-                        <div className="aspect-4/5 overflow-hidden">
-                            <img src={photo.src} alt={photo.alt} className="size-full object-cover transition duration-700 group-hover:scale-105" />
-                        </div>
-                        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 via-black/20 to-transparent p-5 pt-20 text-white">
-                            <p className="mb-1 text-[10px] font-medium uppercase tracking-[0.2em] text-white/70">{photo.eyebrow}</p>
-                            <h3 className="font-serif text-2xl">{photo.title}</h3>
+                        <div className="aspect-4/5 overflow-hidden bg-transparent">
+                            <img src={photo.src} alt={photo.alt} className="size-full object-cover transition duration-700 hover:scale-105" />
                         </div>
                     </motion.article>
                 ))}
             </div>
 
-            <div className="mt-2 flex justify-center gap-2 sm:hidden">
-                <IconButton aria-label="Ver fotos anteriores" onClick={() => scroll('left')} size="small" sx={{ border: '1px solid #d6d3d1', color: '#292524' }}>
+            <div className="mt-2 flex justify-center gap-2">
+                <IconButton aria-label="left photos" onClick={() => scroll('left')} size="small" sx={{ border: '1px solid #d6d3d1', color: '#d6d3d1', '&:hover': { bgcolor: '#d6d3d1', color: '#3c3e40' } }}>
                     <ArrowBackIosNewRounded fontSize="small" />
                 </IconButton>
-                <IconButton aria-label="Ver más fotos" onClick={() => scroll('right')} size="small" sx={{ border: '1px solid #d6d3d1', color: '#292524' }}>
+                <IconButton aria-label="right photos" onClick={() => scroll('right')} size="small" sx={{ border: '1px solid #d6d3d1', color: '#d6d3d1', '&:hover': { bgcolor: '#d6d3d1', color: '#3c3e40' } }}>
                     <ArrowForwardIosRounded fontSize="small" />
                 </IconButton>
             </div>
