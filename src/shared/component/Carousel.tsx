@@ -17,7 +17,7 @@ export function Carousel({ visible = 4, photosArray, handlePhotoClick }: Props) 
 
     return (
         <section className="w-full" aria-label="gallery">
-            <div ref={scrollRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0" style={{ scrollbarWidth: 'none' }}>
+            <div ref={scrollRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0 bg-dark-blue!" style={{ scrollbarWidth: 'none' }}>
                 {photosArray.map((photo, index) => (
                     <motion.article
                         key={index}
