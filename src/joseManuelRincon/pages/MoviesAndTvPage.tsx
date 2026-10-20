@@ -1,5 +1,20 @@
+import { Carousel } from "../../shared/component/Carousel"
+import { CustomTitle } from "../../shared/component/CustomTitle"
+import { MoviesTvData } from "../../shared/data/JoseManuelData"
+import { MoviesTVTitle } from "../../shared/data/PageTitles"
+
 export const MoviesAndTvPage = () => {
+    const title = MoviesTVTitle;
+    const mediaArray = MoviesTvData;
+
+    const handlePhotoClick = (value?: any) => {
+        console.log(value)
+    }
+
     return (
-        <p className="text-white font-bold">MOVIES AND TV</p>
+        <>
+            <CustomTitle title={title} />
+            <Carousel photosArray={mediaArray} handlePhotoClick={handlePhotoClick} />
+        </>
     )
 }

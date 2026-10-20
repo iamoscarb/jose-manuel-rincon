@@ -2,6 +2,7 @@ import jmrDesktop from '@/assets/jmr-hero-desktop.webp';
 import jmrMovil from '@/assets/jmr-hero-movil.webp';
 import { MoviesAndTvPage } from './MoviesAndTvPage';
 import { CustomBox } from '../../shared/component/CustomBox';
+import { TheaterPage } from './TheaterPage';
 
 export const HomePage = () => {
     return (
@@ -19,9 +20,9 @@ export const HomePage = () => {
                 <MoviesAndTvPage />
             </CustomBox>
 
-            <div className="w-full h-screen bg-pink-500" id='teatro'>
-                <p className='text-white text-center font-bold'>Teatro</p>
-            </div>
+            <CustomBox id='teatro'>
+                <TheaterPage />
+            </CustomBox>
 
             <div className="w-full h-screen bg-green-500" id='audio-video'>
                 <p className='text-white text-center font-bold'>Audio y Video</p>

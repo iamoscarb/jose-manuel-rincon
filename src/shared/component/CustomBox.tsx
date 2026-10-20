@@ -9,7 +9,7 @@ export const CustomBox = ({ children, id }: Props) => {
         <Box id={id}
             sx={{
                 bgcolor: '#3c3e40'
-            }} className="p-10">
+            }} className="p-10 scroll-m-16">
             {children}
         </Box>
     )
