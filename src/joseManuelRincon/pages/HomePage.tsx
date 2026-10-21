@@ -16,7 +16,7 @@ export const HomePage = () => {
             */}
             <picture className='w-full h-full block' id='inicio'>
                 <source media='(max-width:767px)' srcSet={jmrMovil} />
-                <img src={jmrDesktop} alt="Jose Manuel Rincon - Hero" className="w-full h-full object-cover" />
+                <img src={jmrDesktop} alt="Jose Manuel Rincon - Hero" className="w-full h-full object-cover" loading='lazy' />
             </picture>
 
             <CustomBox id='cine-tv' className='pb-0!'>

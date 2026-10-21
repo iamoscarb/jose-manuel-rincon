@@ -25,7 +25,7 @@ export function Carousel({ visible = 4, photosArray, handlePhotoClick }: Props) 
                         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
                     >
                         <div className="aspect-4/5 overflow-hidden bg-transparent!">
-                            <img src={photo.src} alt={photo.alt} className="size-full object-cover transition duration-700 group-hover:scale-103" onClick={() => handlePhotoClick(photo)} />
+                            <img src={photo.src} alt={photo.alt} loading='lazy' className="size-full object-cover transition duration-700 group-hover:scale-103" onClick={() => handlePhotoClick(photo)} />
                         </div>
                         <span className="absolute left-4 top-4 rounded-md bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-stone-900 opacity-0 group-hover:opacity-100 transition-all! duration-150! ease-in-out!">{photo.type}</span>
                     </motion.article>
