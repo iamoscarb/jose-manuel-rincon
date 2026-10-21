@@ -1,15 +1,15 @@
-import { Box } from '@mui/material'
-import { type PropsWithChildren } from 'react'
+import { Box, type BoxProps } from '@mui/material'
+import clsx from 'clsx';
 
-interface Props extends PropsWithChildren {
+interface Props extends BoxProps {
     id: string;
 }
-export const CustomBox = ({ children, id }: Props) => {
+export const CustomBox = ({ children, id, className, ...props }: Props) => {
     return (
         <Box id={id}
-            sx={{
-                bgcolor: '#3c3e40'
-            }} className="p-10 scroll-m-16">
+            className={clsx("p-10 scroll-m-16 bg-dark-blue", className)}
+            {...props}
+        >
             {children}
         </Box>
     )
