@@ -4,7 +4,7 @@ import { MoviesTvData } from "../../shared/data/JoseManuelData"
 import { MoviesTVTitle } from "../../shared/data/PageTitles"
 
 export const MoviesAndTvPage = () => {
-    const title = MoviesTVTitle;
+    let title = MoviesTVTitle;
     const mediaArray = MoviesTvData;
 
     const handlePhotoClick = (value?: any) => {

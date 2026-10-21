@@ -3,10 +3,13 @@ import jmrMovil from '@/assets/jmr-hero-movil.webp';
 import { MoviesAndTvPage } from './MoviesAndTvPage';
 import { CustomBox } from '../../shared/component/CustomBox';
 import { TheaterPage } from './TheaterPage';
+import { AudioVideoPage } from './AudioVideoPage';
+import { MediaPage } from './MediaPage';
+import { ContactPage } from './ContactPage';
 
 export const HomePage = () => {
     return (
-        <div>
+        <>
             {/*
             1920 × 1080 px - DESKTOP
             1080 × 1920 px - MOVIL
@@ -16,25 +19,25 @@ export const HomePage = () => {
                 <img src={jmrDesktop} alt="Jose Manuel Rincon - Hero" className="w-full h-full object-cover" />
             </picture>
 
-            <CustomBox id='cine-tv'>
+            <CustomBox id='cine-tv' className='pb-0!'>
                 <MoviesAndTvPage />
             </CustomBox>
 
-            <CustomBox id='teatro'>
+            <CustomBox id='teatro' className='pb-0!'>
                 <TheaterPage />
             </CustomBox>
 
-            <div className="w-full h-screen bg-green-500" id='audio-video'>
-                <p className='text-white text-center font-bold'>Audio y Video</p>
-            </div>
+            <CustomBox id='audio-video' className='pb-0!'>
+                <AudioVideoPage />
+            </CustomBox>
 
-            <div className="w-full h-screen bg-yellow-500 scroll-m-25" id='medios'>
-                <p className='text-white text-center font-bold pt-10 uppercase'>Medios</p>
-            </div>
+            <CustomBox id='medios' className='pb-0!'>
+                <MediaPage />
+            </CustomBox>
 
-            <div className="w-full h-screen bg-orange-500" id='contacto'>
-                <p className='text-white text-center font-bold'>Contacto</p>
-            </div>
-        </div>
+            <CustomBox id='contacto'>
+                <ContactPage />
+            </CustomBox>
+        </>
     )
 }
