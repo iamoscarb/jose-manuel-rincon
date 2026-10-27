@@ -7,8 +7,8 @@ export const Footer = () => {
         <Box className="grid grid-flow-row justify-center-safe p-5 bg-primary" >
             <div className="grid grid-flow-col gap-3">
                 {
-                    socialMediaList.map((social) => (
-                        <a href={social.url} target="_blank">
+                    socialMediaList.map((social, index) => (
+                        <a href={social.url} target="_blank" key={index}>
                             <IconButton aria-label={social.nameSocial} key={social.nameSocial}>
                                 {SocialMediaIcons[social.nameSocial]}
                             </IconButton>
