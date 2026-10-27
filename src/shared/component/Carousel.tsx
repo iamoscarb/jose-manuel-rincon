@@ -1,44 +1,103 @@
-import { motion } from 'motion/react'
-import type { Photo } from '../../interfaces/carousel.interface'
-import { useCarouselControls } from '../../hooks/useCarouselControls'
-import ArrowBackIosNewRounded from '@mui/icons-material/ArrowBackIosNewRounded'
-import ArrowForwardIosRounded from '@mui/icons-material/ArrowForwardIosRounded'
-import IconButton from '@mui/material/IconButton'
+import { useCarouselControls } from '../../hooks/useCarouselControls';
+import type { MediaRatio, Photo } from '../../interfaces/carousel.interface';
+import { AnimatePresence, motion } from 'motion/react'
+import { IconButton } from '@mui/material'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 interface Props {
-    visible?: number;
     photosArray: Photo[];
+    variant?: MediaRatio;
+    aspectRatio?: number;
+    className?: string;
     handlePhotoClick: (value: Photo) => void;
 }
 
-export function Carousel({ visible = 4, photosArray, handlePhotoClick }: Props) {
-
-    let { scroll, scrollRef } = useCarouselControls(visible);
-
+export const Carousel = ({ photosArray, variant = 'poster', aspectRatio, className = '' }: Props) => {
+    const { scrollRef, ratio, desktopBasis, scroll, setActiveIndex, desktopItems, activeIndex } = useCarouselControls(variant, photosArray.length, aspectRatio);
     return (
-        <section className="w-full" aria-label="gallery">
-            <div ref={scrollRef} className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0 bg-dark-blue!" style={{ scrollbarWidth: 'none' }}>
-                {photosArray.map((photo, index) => (
-                    <motion.article
-                        key={index}
-                        className="group relative w-[calc(100vw-40px)] min-w-[calc(100%-1rem)] snap-center overflow-hidden rounded-xl bg-stone-200 sm:min-w-[calc(50%-0.5rem)] sm:snap-start lg:min-w-[calc((100%-3rem)/4)] group"
-                        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                    >
-                        <div className="aspect-4/5 overflow-hidden bg-transparent!">
-                            <img src={photo.src} alt={photo.alt} loading='lazy' className="size-full object-cover transition duration-700 group-hover:scale-103" onClick={() => handlePhotoClick(photo)} />
-                        </div>
-                        <span className="absolute left-4 top-4 rounded-md bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-stone-900 opacity-0 group-hover:opacity-100 transition-all! duration-150! ease-in-out!">{photo.type}</span>
-                    </motion.article>
-                ))}
+        <section className={`w-full ${className}`} aria-label="Galería de fotos">
+            <div className="group relative">
+                <div
+                    ref={scrollRef}
+                    onScroll={(event) => {
+                        const element = event.currentTarget
+                        const first = element.children[0] as HTMLElement | undefined
+                        if (!first) return
+                        const index = Math.round(element.scrollLeft / first.offsetWidth)
+                        setActiveIndex(Math.min(index, photosArray.length - 1))
+                    }}
+                    className="flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain scroll-smooth pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden"
+                    aria-live="polite"
+                >
+                    {photosArray.map((image, index) => (
+                        <motion.figure
+                            key={`${image.src}-${index}`}
+                            initial={{ opacity: 0, scale: 0.96 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.04, duration: 0.35 }}
+                            className={`relative min-w-0 shrink-0 snap-start basis-full sm:basis-[calc(50%-0.375rem)] ${desktopBasis}`}
+                            style={{
+                                ['--desktop-items' as string]: desktopItems,
+                            }}
+                        >
+                            <div
+                                className="relative overflow-hidden rounded-2xl bg-muted shadow-sm ring-1 ring-black/5"
+                                style={{ aspectRatio: ratio }}
+                            >
+                                <img
+                                    src={image.src}
+                                    alt={image.alt}
+                                    loading={index < 2 ? 'eager' : 'lazy'}
+                                    className="h-full w-full object-cover transition duration-500 hover:scale-[1.02]"
+                                />
+                            </div>
+                        </motion.figure>
+                    ))}
+                </div>
+
+                <AnimatePresence>
+                    {activeIndex > 0 && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                            <IconButton
+                                aria-label="Fotos anteriores"
+                                onClick={() => scroll(-1)}
+                                className="absolute! left-3 top-1/2 -translate-y-1/2! bg-white/90! text-slate-900! shadow-lg backdrop-blur transition hover:bg-white!"
+                            >
+                                <ChevronLeftIcon />
+                            </IconButton>
+                        </motion.div>
+                    )}
+                    {activeIndex < photosArray.length - 1 && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                            <IconButton
+                                aria-label="Fotos siguientes"
+                                onClick={() => scroll(1)}
+                                className="absolute! right-3 top-1/2 -translate-y-1/2! bg-white/90! text-slate-900! shadow-lg backdrop-blur transition hover:bg-white!"
+                            >
+                                <ChevronRightIcon />
+                            </IconButton>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
-            <div className="mt-2 flex justify-center md:justify-end gap-2">
-                <IconButton aria-label="left photos" onClick={() => scroll('left')} size="small" sx={{ border: '1px solid #d6d3d1', color: '#d6d3d1', '&:hover': { bgcolor: '#d6d3d1', color: '#3c3e40' } }}>
-                    <ArrowBackIosNewRounded fontSize="small" />
-                </IconButton>
-                <IconButton aria-label="right photos" onClick={() => scroll('right')} size="small" sx={{ border: '1px solid #d6d3d1', color: '#d6d3d1', '&:hover': { bgcolor: '#d6d3d1', color: '#3c3e40' } }}>
-                    <ArrowForwardIosRounded fontSize="small" />
-                </IconButton>
+            <div className="mt-4 flex items-center justify-center-safe gap-4">
+                <div className="flex gap-1.5" aria-label="Seleccionar foto">
+                    {photosArray.slice(0, 8).map((image, index) => (
+                        <button
+                            key={`dot-${image.src}-${index}`}
+                            type="button"
+                            aria-label={`Ir a la foto ${index + 1}`}
+                            aria-current={index === activeIndex}
+                            onClick={() => {
+                                setActiveIndex(index)
+                                scrollRef.current?.children[index]?.scrollIntoView({ behavior: 'smooth', inline: 'start' })
+                            }}
+                            className={`h-1.5 bg-gray-50 rounded-full transition-all ${index === activeIndex ? 'w-6 bg-foreground' : 'w-1.5 bg-border hover:bg-muted-foreground'}`}
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     )
