@@ -56,30 +56,32 @@ export const Carousel = ({ photosArray, variant = 'poster', aspectRatio, classNa
                     ))}
                 </div>
 
-                <AnimatePresence>
-                    {activeIndex > 0 && (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <IconButton
-                                aria-label="Fotos anteriores"
-                                onClick={() => scroll(-1)}
-                                className="absolute! left-3 top-1/2 -translate-y-1/2! bg-white/90! text-slate-900! shadow-lg backdrop-blur transition hover:bg-white!"
-                            >
-                                <ChevronLeftIcon />
-                            </IconButton>
-                        </motion.div>
-                    )}
-                    {activeIndex < photosArray.length - 1 && (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <IconButton
-                                aria-label="Fotos siguientes"
-                                onClick={() => scroll(1)}
-                                className="absolute! right-3 top-1/2 -translate-y-1/2! bg-white/90! text-slate-900! shadow-lg backdrop-blur transition hover:bg-white!"
-                            >
-                                <ChevronRightIcon />
-                            </IconButton>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {photosArray.length > desktopItems && (
+                    <AnimatePresence>
+                        {activeIndex > 0 && (
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                                <IconButton
+                                    aria-label="Fotos anteriores"
+                                    onClick={() => scroll(-1)}
+                                    className="absolute! left-3 top-1/2 -translate-y-1/2! bg-white/90! text-slate-900! shadow-lg backdrop-blur transition hover:bg-white!"
+                                >
+                                    <ChevronLeftIcon />
+                                </IconButton>
+                            </motion.div>
+                        )}
+                        {activeIndex < photosArray.length - 1 && (
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                                <IconButton
+                                    aria-label="Fotos siguientes"
+                                    onClick={() => scroll(1)}
+                                    className="absolute! right-3 top-1/2 -translate-y-1/2! bg-white/90! text-slate-900! shadow-lg backdrop-blur transition hover:bg-white!"
+                                >
+                                    <ChevronRightIcon />
+                                </IconButton>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                )}
             </div>
 
             <div className="mt-4 flex items-center justify-center-safe gap-4">
