@@ -48,7 +48,10 @@ export const HeaderMenu = () => {
             >
                 <Toolbar className="mx-auto w-full px-4">
                     {/* Logo / marca */}
-                    <CustomLogo />
+                    <Box className="flex flex-1 items-center gap-2">
+                        <CustomLogo className="text-3xl! md:text-2xl! " />
+                    </Box>
+
 
                     {/* Enlaces de escritorio */}
                     <Box className="hidden items-center gap-1 md:flex">
@@ -108,9 +111,7 @@ export const HeaderMenu = () => {
                 slotProps={{ paper: { className: "w-3/4! bg-primary! text-white!" } }}
             >
                 <Box className="flex justify-between items-center gap-2 px-5 py-3">
-                    <span className="text-2xl staatliches-font">
-                        José Manuel Rincón
-                    </span>
+                    <CustomLogo className="text-2xl!" />
 
                     <IconButton
                         color="inherit"

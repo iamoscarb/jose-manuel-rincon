@@ -1,11 +1,22 @@
-import Box from "@mui/material/Box"
+import clsx from 'clsx';
+import { Typography, type TypographyProps } from '@mui/material';
+import { PageTitle } from '../data/PageTitles';
 
-export const CustomLogo = () => {
+export const CustomLogo = ({ className, ...props }: TypographyProps) => {
+    const title = PageTitle;
     return (
-        <Box className="flex flex-1 items-center gap-2">
-            <span className="text-3xl md:text-2xl staatliches-font py-0 px-0">
-                José Manuel Rincón
-            </span>
-        </Box>
+        <Typography
+            component="h1"
+            className={clsx(
+                "py-0 px-0",
+                className
+            )}
+            {...props}
+            sx={{
+                fontFamily: '"Staatliches", sans-serif',
+            }}
+        >
+            {title}
+        </Typography>
     )
 }
