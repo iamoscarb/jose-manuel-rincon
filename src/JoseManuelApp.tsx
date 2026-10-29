@@ -11,6 +11,5 @@ export const JoseManuelApp = () => {
             <RouterProvider router={appRouter} />
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-
-    )
+    );
 }
